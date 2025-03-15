@@ -24,16 +24,6 @@ const Collection = () => {
 
   }
 
-  const toggleSubCategory = (e) => {
-
-    if (subCategory.includes(e.target.value)) {
-      setSubCategory(prev=> prev.filter(item => item !== e.target.value))
-    }
-    else{
-      setSubCategory(prev => [...prev,e.target.value])
-    }
-  }
-
   const applyFilter = () => {
 
     let productsCopy = products.slice();
@@ -95,28 +85,28 @@ const Collection = () => {
           <p className='mb-3 text-sm font-medium'>CATEGORIES</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Men'} onChange={toggleCategory}/> Men
+              <input className='w-3' type="checkbox" value={'Beds'} onChange={toggleCategory}/> Beds
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Women'} onChange={toggleCategory}/> Women
+              <input className='w-3' type="checkbox" value={'Sofas'} onChange={toggleCategory}/> Sofas
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Kids'} onChange={toggleCategory}/> kids
-            </p>
-          </div>
-        </div>
-        {/* SubCategory Filter */}
-        <div className={`border border-gray-300 pl-5 py-3 my-5 ${showFilter ? '' :'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium'>TYPE</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Topwear'} onChange={toggleSubCategory}/> Topwear
+              <input className='w-3' type="checkbox" value={'Kitchen & dinning'} onChange={toggleCategory}/> Kitchen & dinning
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Bottomwear'} onChange={toggleSubCategory}/> Bottomwear
+              <input className='w-3' type="checkbox" value={'Home decor'} onChange={toggleCategory}/> Home decor
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Winterwear'} onChange={toggleSubCategory}/> Winterwear
+              <input className='w-3' type="checkbox" value={'Mattresses'} onChange={toggleCategory}/> Mattresses
+            </p>
+            <p className='flex gap-2'>
+              <input className='w-3' type="checkbox" value={'Wardrobes'} onChange={toggleCategory}/> Wardrobes
+            </p>
+            <p className='flex gap-2'>
+              <input className='w-3' type="checkbox" value={'Dining Sets'} onChange={toggleCategory}/> Dining Sets
+            </p>
+            <p className='flex gap-2'>
+              <input className='w-3' type="checkbox" value={'Study tables'} onChange={toggleCategory}/> Study tables
             </p>
           </div>
         </div>
