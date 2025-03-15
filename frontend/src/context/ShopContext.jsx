@@ -8,7 +8,7 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
 
     const currency = '₹';
-    const delivery_fee = 50;
+    const delivery_fee = 100;
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
@@ -18,41 +18,41 @@ const ShopContextProvider = (props) => {
     const navigate = useNavigate();
 
 
-    const addToCart = async (itemId, size) => {
-
-        if (!size) {
-            toast.error('Select Product Size');
-            return;
-        }
-
+    const addToCart = async (itemId) => {
         let cartData = structuredClone(cartItems);
-
+    
+        // Check if the item already exists in the cart
         if (cartData[itemId]) {
-            if (cartData[itemId][size]) {
-                cartData[itemId][size] += 1;
-            }
-            else {
-                cartData[itemId][size] = 1;
-            }
+            // Increment the quantity of the item
+            cartData[itemId] += 1;
+        } else {
+            // Add the item to the cart with an initial quantity of 1
+            cartData[itemId] = 1;
         }
-        else {
-            cartData[itemId] = {};
-            cartData[itemId][size] = 1;
-        }
+    
+        // Update the cart state
         setCartItems(cartData);
-
+    
+        // If the user is authenticated, send the data to the backend
         if (token) {
             try {
-
-                await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } })
-
+                await axios.post(
+                    backendUrl + '/api/cart/add',
+                    { itemId }, // Removed `size` from the payload
+                    { headers: { token } }
+                );
+    
+                // Show a success toast message
+                toast.success('Product added to cart!');
             } catch (error) {
-                console.log(error)
-                toast.error(error.message)
+                console.log(error);
+                toast.error(error.message || 'Failed to add product to cart.');
             }
+        } else {
+            // Show a success toast message for guest users
+            toast.success('Product added to cart!');
         }
-
-    }
+    };
 
     const getCartCount = () => {
         let totalCount = 0;
