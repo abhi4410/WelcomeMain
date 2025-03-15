@@ -17,7 +17,7 @@ const Hero = ({ isScrolled }) => {
       >
         <div className="container mx-auto flex items-center justify-between">
           <div className="text-2xl font-semibold tracking-tight">
-            WelcomeFurniture<span className="text-rose-500">.</span>
+            Welcome Furniture<span className="text-rose-500">.</span>
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
@@ -79,7 +79,7 @@ const Hero = ({ isScrolled }) => {
         >
           <div className="flex justify-between items-center mb-8">
             <div className="text-2xl font-semibold tracking-tight">
-              WelcomeFurniture<span className="text-rose-500">.</span>
+              Welcome Furniture<span className="text-rose-500">.</span>
             </div>
             <button aria-label="Close menu" className="p-1" onClick={() => setMobileMenuOpen(false)}>
               <X className="h-6 w-6" />

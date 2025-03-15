@@ -27,7 +27,7 @@ const NewsletterBox = ({ inView }) => {
             <button className="w-full sm:w-auto bg-rose-500 hover:bg-rose-600 text-white rounded-full px-8 py-3">SUBSCRIBE</button>
           </motion.div>
         </div>
-        <p className="mt-8 text-gray-400 text-sm">© 2025 WelcomeFurniture. All rights reserved.</p>
+        <p className="mt-8 text-gray-400 text-sm">© 2025 Welcome Furniture. All rights reserved.</p>
       </motion.div>
     </section>
   )

@@ -40,9 +40,9 @@ const Footer = () => {
 
       <div className='container mx-auto px-4 flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 mb-10 text-sm'>
         <div>
-            <img src={assets.logo} className='mb-5 w-32' alt="WelcomeFurniture Logo" />
+            <img src={assets.logo} className='mb-5 w-32' alt="Welcome Furniture Logo" />
             <p className='w-full md:w-2/3 text-gray-600'>
-              Welcome to WelcomeFurniture, where timeless craftsmanship meets contemporary design. 
+              Welcome to Welcome Furniture, where timeless craftsmanship meets contemporary design. 
               We provide beautifully crafted furniture that transforms your living spaces with elegance and comfort, 
               built to last for generations.
             </p>
@@ -81,7 +81,7 @@ const Footer = () => {
                   <Link to="/terms">Terms & Conditions</Link>
                 </li>
                 <li className="hover:text-rose-500 transition-colors">
-                  <a href="#" onClick={handlePrivacyPolicyClick}>Privacy Policy</a>
+                  <Link to="/privacy-policy">Privacy Policy</Link>
                 </li>
             </ul>
         </div>
@@ -89,9 +89,9 @@ const Footer = () => {
         <div>
             <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
             <ul className='flex flex-col gap-2 text-gray-600'>
-                <li>123 Furniture Avenue</li>
-                <li>New York, NY 10001</li>
-                <li className="mt-2">+1-555-123-4567</li>
+                <li>Shop No 2, Vallabh Nagar Complex</li>
+                <li>Tarsali, Vadodara 390010</li>
+                <li className="mt-2">+91-942-918-8625</li>
                 <li className="hover:text-rose-500 transition-colors">
                   <a href="mailto:info@welcomefurniture.com">info@welcomefurniture.com</a>
                 </li>
@@ -104,7 +104,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
           <hr className="border-gray-200" />
           <p className='py-5 text-sm text-center text-gray-600'>
-            Copyright &copy; {new Date().getFullYear()} WelcomeFurniture - All Rights Reserved.
+            Copyright &copy; {new Date().getFullYear()} Welcome Furniture - All Rights Reserved.
           </p>
       </div>
     </footer>
