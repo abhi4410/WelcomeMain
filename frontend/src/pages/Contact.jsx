@@ -20,6 +20,7 @@ const Contact = () => {
               <input type="email" name="email" placeholder="Email" required className="w-full p-2 border border-gray-300 rounded" />
               <textarea name="message" placeholder="Message" required className="w-full p-2 border border-gray-300 rounded"></textarea>
               <input type="hidden" name="_next" value="http://localhost:5173/contact"></input>
+              <input type="hidden" name="_captcha" value="false"></input>
               <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">Send</button>
             </form>
             
