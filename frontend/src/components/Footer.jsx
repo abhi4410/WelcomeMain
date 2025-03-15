@@ -89,9 +89,9 @@ const Footer = () => {
         <div>
             <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
             <ul className='flex flex-col gap-2 text-gray-600'>
-                <li>123 Furniture Avenue</li>
-                <li>New York, NY 10001</li>
-                <li className="mt-2">+1-555-123-4567</li>
+                <li>Shop No 2, Vallabh Nagar Complex</li>
+                <li>Tarsali, Vadodara 390010</li>
+                <li className="mt-2">+91-942-918-8625</li>
                 <li className="hover:text-rose-500 transition-colors">
                   <a href="mailto:info@welcomefurniture.com">info@welcomefurniture.com</a>
                 </li>
