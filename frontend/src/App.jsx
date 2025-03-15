@@ -17,10 +17,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import Terms from './pages/Terms'
+import ScrollToTop from './components/ScrollToTop'
 
 const App = () => {
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+      <ScrollToTop />
       <ToastContainer />
       <Navbar />
       <SearchBar />

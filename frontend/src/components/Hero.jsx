@@ -122,9 +122,9 @@ const Hero = ({ isScrolled }) => {
               Curated furniture collections that blend style, comfort, and functionality for the modern home.
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <button className="bg-black hover:bg-gray-800 text-white rounded-full px-8 py-6 h-auto">
+              <Link to="/collection" className="bg-black hover:bg-gray-800 text-white rounded-full px-8 py-6 inline-block">
                 EXPLORE COLLECTIONS
-              </button>
+              </Link>
             </motion.div>
           </div>
         </motion.div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
 import { Link } from 'react-router-dom'
-import { Facebook, Instagram, Twitter, Linkedin, X } from 'lucide-react'
+import { Instagram, X } from 'lucide-react'
 
 const Footer = () => {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false)
@@ -48,18 +48,9 @@ const Footer = () => {
               We provide beautifully crafted furniture that transforms your living spaces with elegance and comfort, 
               built to last for generations.
             </p>
-            <div className="flex space-x-4 mt-6">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-rose-500">
-                <Facebook size={20} />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-rose-500">
-                <Instagram size={20} />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-rose-500">
-                <Twitter size={20} />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-rose-500">
-                <Linkedin size={20} />
+            <div className="flex mt-6">
+              <a href="https://instagram.com/welcome_._furniture" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-rose-500 transition-colors">
+                <Instagram size={22} />
               </a>
             </div>
         </div>

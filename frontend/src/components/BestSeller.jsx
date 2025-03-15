@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronRight, Heart, Plus } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { ShopContext } from '../context/ShopContext'
 import { Link } from 'react-router-dom'
 
@@ -109,46 +109,6 @@ const BestSeller = ({ inView }) => {
                         </div>
                       )}
                       <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                      {/* Quick actions */}
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex space-x-2">
-                        <motion.button
-                          className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-rose-500 hover:text-white transition-colors"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          onClick={(e) => {
-                            e.preventDefault() // Prevent navigation
-                            // Add to wishlist functionality
-                          }}
-                        >
-                          <Heart className="w-5 h-5" />
-                        </motion.button>
-                        <motion.button
-                          className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-rose-500 hover:text-white transition-colors"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          onClick={(e) => {
-                            e.preventDefault() // Prevent navigation
-                            // Quick view functionality
-                          }}
-                        >
-                          <Plus className="w-5 h-5" />
-                        </motion.button>
-                      </div>
-
-                      {/* Add to cart bar */}
-                      <motion.div
-                        className="absolute bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                        whileHover={{ y: -5 }}
-                        onClick={(e) => {
-                          e.preventDefault() // Prevent navigation
-                          // Add to cart functionality
-                        }}
-                      >
-                        <button className="w-full py-2 bg-black hover:bg-rose-500 text-white transition-colors rounded-full text-sm font-medium">
-                          Add to Cart
-                        </button>
-                      </motion.div>
                     </div>
                   </Link>
                   <div className="space-y-1">
