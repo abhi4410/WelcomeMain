@@ -1,84 +1,66 @@
-import React, { useContext, useState } from 'react'
-import {assets} from '../assets/assets'
-import { Link, NavLink } from 'react-router-dom'
-import { ShopContext } from '../context/ShopContext';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Search, User, ShoppingBag, Menu } from 'lucide-react'
 
-const Navbar = () => {
-
-    const [visible,setVisible] = useState(false);
-
-    const {setShowSearch , getCartCount , navigate, token, setToken, setCartItems} = useContext(ShopContext);
-
-    const logout = () => {
-        navigate('/login')
-        localStorage.removeItem('token')
-        setToken('')
-        setCartItems({})
-    }
-
+const Navbar = ({ isScrolled, setMobileMenuOpen }) => {
   return (
-    <div className='flex items-center justify-between py-5 font-medium'>
-      
-      <Link to='/'><img src={assets.logo} className='w-36' alt="" /></Link>
-
-      <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
-        
-        <NavLink to='/' className='flex flex-col items-center gap-1'>
-            <p>HOME</p>
-            <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
-        </NavLink>
-        <NavLink to='/collection' className='flex flex-col items-center gap-1'>
-            <p>COLLECTION</p>
-            <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
-        </NavLink>
-        <NavLink to='/about' className='flex flex-col items-center gap-1'>
-            <p>ABOUT</p>
-            <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
-        </NavLink>
-        <NavLink to='/contact' className='flex flex-col items-center gap-1'>
-            <p>CONTACT</p>
-            <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
-        </NavLink>
-
-      </ul>
-
-      <div className='flex items-center gap-6'>
-            <img onClick={()=> { setShowSearch(true); navigate('/collection') }} src={assets.search_icon} className='w-5 cursor-pointer' alt="" />
-            
-            <div className='group relative'>
-                <img onClick={()=> token ? null : navigate('/login') } className='w-5 cursor-pointer' src={assets.profile_icon} alt="" />
-                {/* Dropdown Menu */}
-                {token && 
-                <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
-                    <div className='flex flex-col gap-2 w-36 py-3 px-5  bg-slate-100 text-gray-500 rounded'>
-                        <p className='cursor-pointer hover:text-black'>My Profile</p>
-                        <p onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
-                        <p onClick={logout} className='cursor-pointer hover:text-black'>Logout</p>
-                    </div>
-                </div>}
-            </div> 
-            <Link to='/cart' className='relative'>
-                <img src={assets.cart_icon} className='w-5 min-w-5' alt="" />
-                <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>{getCartCount()}</p>
-            </Link> 
-            <img onClick={()=>setVisible(true)} src={assets.menu_icon} className='w-5 cursor-pointer sm:hidden' alt="" /> 
-      </div>
-
-        {/* Sidebar menu for small screens */}
-        <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`}>
-                <div className='flex flex-col text-gray-600'>
-                    <div onClick={()=>setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>
-                        <img className='h-4 rotate-180' src={assets.dropdown_icon} alt="" />
-                        <p>Back</p>
-                    </div>
-                    <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/'>HOME</NavLink>
-                    <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/collection'>COLLECTION</NavLink>
-                    <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/about'>ABOUT</NavLink>
-                    <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/contact'>CONTACT</NavLink>
-                </div>
+    <header
+      className={`py-4 px-6 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto flex items-center justify-between">
+        <div className="text-2xl font-semibold tracking-tight">
+          WelcomeFurniture<span className="text-rose-500">.</span>
         </div>
 
-    </div>
+        <nav className="hidden md:flex items-center space-x-8">
+          <Link to="/" className="uppercase text-sm font-medium border-b-2 border-black">
+            HOME
+          </Link>
+          <Link
+            to="/collection"
+            className="uppercase text-sm font-medium text-gray-600 hover:text-black transition-colors"
+          >
+            COLLECTION
+          </Link>
+          <Link
+            to="/about"
+            className="uppercase text-sm font-medium text-gray-600 hover:text-black transition-colors"
+          >
+            ABOUT
+          </Link>
+          <Link
+            to="/contact"
+            className="uppercase text-sm font-medium text-gray-600 hover:text-black transition-colors"
+          >
+            CONTACT
+          </Link>
+        </nav>
+
+        <div className="flex items-center space-x-4">
+          <button aria-label="Search" className="p-1 hover:text-rose-500 transition-colors">
+            <Search className="h-5 w-5" />
+          </button>
+          <button aria-label="Account" className="p-1 hover:text-rose-500 transition-colors">
+            <User className="h-5 w-5" />
+          </button>
+          <button aria-label="Cart" className="p-1 relative hover:text-rose-500 transition-colors">
+            <ShoppingBag className="h-5 w-5" />
+            <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+              0
+            </span>
+          </button>
+          <button
+            aria-label="Menu"
+            className="p-1 md:hidden hover:text-rose-500 transition-colors"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
+      </div>
+    </header>
   )
 }
 
