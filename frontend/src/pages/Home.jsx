@@ -7,6 +7,7 @@ import OurPolicy from '../components/OurPolicy'
 import NewsletterBox from '../components/NewsletterBox'
 
 const Home = () => {
+  // Keep the isScrolled state here to pass to App/Layout component
   const [isScrolled, setIsScrolled] = useState(false)
 
   // Animation refs for scroll-based animations
@@ -41,7 +42,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden">
-      <Hero isScrolled={isScrolled} />
+      <Hero />
       
       <div ref={collectionsRef}>
         <LatestCollection inView={collectionsInView} />

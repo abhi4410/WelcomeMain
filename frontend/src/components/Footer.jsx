@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { assets } from '../assets/assets'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
 import { Link } from 'react-router-dom'
 import { Facebook, Instagram, Twitter, Linkedin, X } from 'lucide-react'
@@ -40,8 +39,11 @@ const Footer = () => {
 
       <div className='container mx-auto px-4 flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 mb-10 text-sm'>
         <div>
-            <img src={assets.logo} className='mb-5 w-32' alt="WelcomeFurniture Logo" />
-            <p className='w-full md:w-2/3 text-gray-600'>
+            {/* Updated logo to match navbar styling */}
+            <Link to="/" className="text-2xl font-semibold tracking-tight mb-5 inline-block">
+              WelcomeFurniture<span className="text-rose-500">.</span>
+            </Link>
+            <p className='w-full md:w-2/3 text-gray-600 mt-2'>
               Welcome to WelcomeFurniture, where timeless craftsmanship meets contemporary design. 
               We provide beautifully crafted furniture that transforms your living spaces with elegance and comfort, 
               built to last for generations.
@@ -72,7 +74,7 @@ const Footer = () => {
                   <Link to="/about">About us</Link>
                 </li>
                 <li className="hover:text-rose-500 transition-colors">
-                  <Link to="/products">Products</Link>
+                  <Link to="/collection">Collection</Link>
                 </li>
                 <li className="hover:text-rose-500 transition-colors">
                   <Link to="/contact">Contact</Link>
