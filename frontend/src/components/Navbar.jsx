@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Search, User, ShoppingBag, Menu } from 'lucide-react'
+import { ShopContext } from '../context/ShopContext'
 
 const Navbar = ({ isScrolled, setMobileMenuOpen }) => {
   // Get current location to determine active link
   const location = useLocation();
   const currentPath = location.pathname;
+  
+  // Get cart count from ShopContext
+  const { getCartCount } = useContext(ShopContext);
+  const cartCount = getCartCount ? getCartCount() : 0;
 
   return (
     <header
@@ -60,12 +65,14 @@ const Navbar = ({ isScrolled, setMobileMenuOpen }) => {
           <button aria-label="Account" className="p-1 hover:text-rose-500 transition-colors">
             <User className="h-5 w-5" />
           </button>
-          <button aria-label="Cart" className="p-1 relative hover:text-rose-500 transition-colors">
+          <Link to="/cart" className="p-1 relative hover:text-rose-500 transition-colors">
             <ShoppingBag className="h-5 w-5" />
-            <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-              0
-            </span>
-          </button>
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </Link>
           <button
             aria-label="Menu"
             className="p-1 md:hidden hover:text-rose-500 transition-colors"

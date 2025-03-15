@@ -53,7 +53,8 @@ const Collection = () => {
   if (error) return <div className="text-center text-red-500">Error loading products.</div>;
 
   return (
-    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-20 border-t">
+    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-20 pb-20 border-t'>
+      
       {/* Filter Options */}
       <div className="min-w-60">
         <p className="my-2 text-xl flex items-center cursor-pointer gap-2">FILTERS</p>

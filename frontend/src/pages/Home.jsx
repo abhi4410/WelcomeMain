@@ -4,11 +4,11 @@ import Hero from '../components/Hero'
 import LatestCollection from '../components/LatestCollection'
 import BestSeller from '../components/BestSeller'
 import OurPolicy from '../components/OurPolicy'
-import NewsletterBox from '../components/NewsletterBox'
 
 const Home = () => {
   // Keep the isScrolled state here to pass to App/Layout component
   const [isScrolled, setIsScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Animation refs for scroll-based animations
   const { ref: collectionsRef, inView: collectionsInView } = useInView({
@@ -41,18 +41,22 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col overflow-x-hidden">
-      <Hero />
+    <div className="min-h-screen flex flex-col overflow-x-hidden" style={{ marginTop: '0px', position: 'relative' }}>
+      {/* Hero section - ensure it doesn't cover the navbar */}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <Hero />
+      </div>
       
-      <div ref={collectionsRef}>
+      {/* Content sections */}
+      <div ref={collectionsRef} style={{ position: 'relative', zIndex: 1 }}>
         <LatestCollection inView={collectionsInView} />
       </div>
       
-      <div ref={sellersRef}>
+      <div ref={sellersRef} style={{ position: 'relative', zIndex: 1 }}>
         <BestSeller inView={sellersInView} />
       </div>
       
-      <div ref={policyRef}>
+      <div ref={policyRef} style={{ position: 'relative', zIndex: 1 }}>
         <OurPolicy inView={policyInView} />
       </div>
     </div>
