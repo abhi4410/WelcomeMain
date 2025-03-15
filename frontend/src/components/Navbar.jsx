@@ -1,12 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Search, User, ShoppingBag, Menu } from 'lucide-react'
 
 const Navbar = ({ isScrolled, setMobileMenuOpen }) => {
+  // Get current location to determine active link
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <header
       className={`py-4 px-6 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-white"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between">
@@ -15,24 +19,35 @@ const Navbar = ({ isScrolled, setMobileMenuOpen }) => {
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="uppercase text-sm font-medium border-b-2 border-black">
+          <Link 
+            to="/" 
+            className={`uppercase text-sm font-medium ${currentPath === '/' 
+              ? 'border-b-2 border-black' 
+              : 'text-gray-600 hover:text-black transition-colors'}`}
+          >
             HOME
           </Link>
           <Link
             to="/collection"
-            className="uppercase text-sm font-medium text-gray-600 hover:text-black transition-colors"
+            className={`uppercase text-sm font-medium ${currentPath === '/products' || currentPath === '/collection'
+              ? 'border-b-2 border-black' 
+              : 'text-gray-600 hover:text-black transition-colors'}`}
           >
             COLLECTION
           </Link>
           <Link
             to="/about"
-            className="uppercase text-sm font-medium text-gray-600 hover:text-black transition-colors"
+            className={`uppercase text-sm font-medium ${currentPath === '/about' 
+              ? 'border-b-2 border-black' 
+              : 'text-gray-600 hover:text-black transition-colors'}`}
           >
             ABOUT
           </Link>
           <Link
             to="/contact"
-            className="uppercase text-sm font-medium text-gray-600 hover:text-black transition-colors"
+            className={`uppercase text-sm font-medium ${currentPath === '/contact' 
+              ? 'border-b-2 border-black' 
+              : 'text-gray-600 hover:text-black transition-colors'}`}
           >
             CONTACT
           </Link>
