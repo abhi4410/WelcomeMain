@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
   };
 
   return (
-    <div style={containerStyle}>
+    <div style={{ ...containerStyle, marginTop: '40px' }}>
       <h1 style={headerStyle}>Welcome to Furniture India Customer Privacy Policy</h1>
       <p style={paragraphStyle}>
         A partnership in trust. We will make sure that your personal information is protected when it is sent outside of the Welcome Furniture Group. We make sure our trusted service partners keep your personal information safe. When Welcome Furniture set out to create a high-quality, low-priced line of home furnishings, we knew we couldn't do it without the help of some very important partners-you, our customers. Whether you're researching purchases in the Welcome Furniture catalogue, picking up your furniture in our self-serve warehouses or assembling your purchases at home-we're working together to help you create a better everyday life at a price everyone can afford. Welcome Furniture is based on a partnership with our customers. Without you, Welcome Furniture could not exist. This partnership extends to the way we handle your personal information. Just like shopping at Welcome Furniture is a cooperative experience, Welcome Furniture makes a point of working with our customers when it comes to their privacy. We only collect the information we may need to create a better shopping experience for you. This Privacy Notice is our way of telling you what information we collect, how we use it and how you can access, change and remove your information.

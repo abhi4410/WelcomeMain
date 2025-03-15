@@ -57,16 +57,16 @@ const About = () => {
           variants={slideInLeft}
           className='w-full md:max-w-[450px] rounded-lg shadow-lg object-cover hover:shadow-xl transition-shadow duration-300'
           src={assets.about_img} 
-          alt="WelcomeFurniture workshop" 
+          alt="Welcome Furniture workshop" 
         />
         <motion.div 
           variants={slideInRight}
           className='flex flex-col justify-center gap-6 md:w-2/4 text-gray-600'
         >
-          <p>WelcomeFurniture was born out of a passion for craftsmanship and a desire to bring timeless, quality furniture into people's homes. Our journey began with a simple idea: to provide beautifully crafted furniture that combines traditional woodworking techniques with contemporary design, allowing customers to create spaces that reflect their personal style.</p>
+          <p>Welcome Furniture was born out of a passion for craftsmanship and a desire to bring timeless, quality furniture into people's homes. Our journey began with a simple idea: to provide beautifully crafted furniture that combines traditional woodworking techniques with contemporary design, allowing customers to create spaces that reflect their personal style.</p>
           <p>Since our inception, we've worked tirelessly to source the finest materials and collaborate with skilled artisans who share our commitment to quality. From living room centerpieces to bedroom essentials, we offer an extensive collection of furniture pieces that are built to last generations.</p>
           <b className='text-gray-800 text-xl'>Our Mission</b>
-          <p>Our mission at WelcomeFurniture is to elevate everyday living through thoughtfully designed furniture. We're dedicated to creating pieces that not only beautify your space but also enhance your daily life, from the moment you wake up to when you gather with loved ones at the end of the day.</p>
+          <p>Our mission at Welcome Furniture is to elevate everyday living through thoughtfully designed furniture. We're dedicated to creating pieces that not only beautify your space but also enhance your daily life, from the moment you wake up to when you gather with loved ones at the end of the day.</p>
         </motion.div>
       </motion.div>
 
