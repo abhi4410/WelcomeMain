@@ -1,7 +1,12 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import PrivacyPolicy from '../pages/PrivacyPolicy';
 
 const Footer = () => {
+  const handlePrivacyPolicyClick = () => {
+    window.location.href = '/privacy-policy';
+  };
+
   return (
     <div>
       <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm'>
@@ -19,7 +24,7 @@ const Footer = () => {
                 <li>Home</li>
                 <li>About us</li>
                 <li>Delivery</li>
-                <li>Privacy policy</li>
+                <li onClick={handlePrivacyPolicyClick} className='cursor-pointer'>Privacy policy</li>
             </ul>
         </div>
 
