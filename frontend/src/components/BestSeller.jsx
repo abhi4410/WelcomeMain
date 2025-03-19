@@ -56,7 +56,7 @@ const BestSeller = ({ inView }) => {
             </p>
           </div>
           <motion.div className="hidden md:block" whileHover={{ x: 5 }}>
-            <Link to="/products" className="flex items-center space-x-2 text-black hover:text-rose-500 transition-colors">
+            <Link to="/collection" className="flex items-center space-x-2 text-black hover:text-rose-500 transition-colors">
               <span className="border-b border-black pb-1 hover:border-rose-500">View All Products</span>
               <ChevronRight className="w-4 h-4" />
             </Link>
@@ -80,7 +80,6 @@ const BestSeller = ({ inView }) => {
             {bestSellers.map((product, index) => {
               const { tag, className } = getTagInfo(product)
               const discountPercentage = product.discount ? `-${Math.round(product.discount)}%` : ""
-              const rating = product.rating || 4 // Default rating if not provided
               
               return (
                 <motion.div
@@ -112,18 +111,7 @@ const BestSeller = ({ inView }) => {
                     </div>
                   </Link>
                   <div className="space-y-1">
-                    <div className="flex items-center mt-1 mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className={`w-4 h-4 ${i < rating ? "text-amber-400 fill-amber-400" : "text-gray-300 fill-gray-300"}`}
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                        </svg>
-                      ))}
-                    </div>
+                    
                     <h3 className="text-lg font-medium">{product.name}</h3>
                     <div className="flex items-center space-x-2">
                       <p className="text-gray-900 font-medium">${product.price}</p>
@@ -141,7 +129,7 @@ const BestSeller = ({ inView }) => {
         )}
 
         <motion.div className="mt-12 text-center md:hidden" whileHover={{ y: -5 }}>
-          <Link to="/products" className="flex items-center space-x-2 text-black hover:text-rose-500 transition-colors mx-auto">
+          <Link to="/collection" className="flex items-center space-x-2 text-black hover:text-rose-500 transition-colors mx-auto">
             <span className="border-b border-black pb-1 hover:border-rose-500">View All Products</span>
             <ChevronRight className="w-4 h-4" />
           </Link>

@@ -8,7 +8,6 @@ import OurPolicy from '../components/OurPolicy'
 const Home = () => {
   // Keep the isScrolled state here to pass to App/Layout component
   const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Animation refs for scroll-based animations
   const { ref: collectionsRef, inView: collectionsInView } = useInView({
@@ -41,7 +40,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col overflow-x-hidden" style={{ marginTop: '0px', position: 'relative' }}>
+    <div className="min-h-screen flex flex-col overflow-x-hidden" style={{ marginTop: '0px', position: 'relative' , zIndex: -1}}>
       {/* Hero section - ensure it doesn't cover the navbar */}
       <div style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
