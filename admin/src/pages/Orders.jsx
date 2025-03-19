@@ -36,6 +36,7 @@ const Orders = ({ token }) => {
     try {
       const response = await axios.post(backendUrl + '/api/order/status' , {orderId, status:event.target.value}, { headers: {token}})
       if (response.data.success) {
+        toast.success("Statud Updated Successfully")
         await fetchAllOrders()
       }
     } catch (error) {
