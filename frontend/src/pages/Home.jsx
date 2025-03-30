@@ -6,28 +6,22 @@ import BestSeller from '../components/BestSeller'
 import OurPolicy from '../components/OurPolicy'
 
 const Home = () => {
-  // Keep the isScrolled state here to pass to App/Layout component
   const [isScrolled, setIsScrolled] = useState(false)
 
   // Animation refs for scroll-based animations
   const { ref: collectionsRef, inView: collectionsInView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.05,
   })
 
   const { ref: sellersRef, inView: sellersInView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.05,
   })
 
   const { ref: policyRef, inView: policyInView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
-  })
-
-  const { ref: newsletterRef, inView: newsletterInView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.05,
   })
 
   useEffect(() => {
@@ -40,22 +34,18 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col overflow-x-hidden" style={{ marginTop: '0px', position: 'relative' , zIndex: -1}}>
-      {/* Hero section - ensure it doesn't cover the navbar */}
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <Hero />
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Hero isScrolled={isScrolled} />
       
-      {/* Content sections */}
-      <div ref={collectionsRef} style={{ position: 'relative', zIndex: 1 }}>
+      <div ref={collectionsRef}>
         <LatestCollection inView={collectionsInView} />
       </div>
       
-      <div ref={sellersRef} style={{ position: 'relative', zIndex: 1 }}>
+      <div ref={sellersRef}>
         <BestSeller inView={sellersInView} />
       </div>
       
-      <div ref={policyRef} style={{ position: 'relative', zIndex: 1 }}>
+      <div ref={policyRef}>
         <OurPolicy inView={policyInView} />
       </div>
     </div>

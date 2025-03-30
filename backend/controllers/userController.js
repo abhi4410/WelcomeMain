@@ -130,36 +130,34 @@ const forgotPassword = async (req, res) => {
             subject: "Welcome Furniture - Password Reset",
             html: `
                 <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: auto; padding: 30px; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-    <div style="text-align: center;">
-        <img src="https://via.placeholder.com/150" alt="Welcome Furniture Logo" style="width: 120px; margin-bottom: 20px;">
-        <h1 style="color: #333333; font-size: 24px; font-weight: 600; margin-bottom: 10px;">Forgot Your Password?</h1>
-        <p style="font-size: 16px; color: #666666; margin-bottom: 25px;">No worries! Let's get you back into your account.</p>
-    </div>
-    <div style="text-align: center;">
-        <a href="${resetLink}" style="background-color: #FF7F50; color: #ffffff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-size: 18px; font-weight: 500; display: inline-block; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);">
-            Reset Password
-        </a>
-    </div>
-    <div style="margin-top: 25px; text-align: center;">
-        <p style="font-size: 14px; color: #999999; line-height: 1.6;">
-            This link will expire in <strong>1 hour</strong>. If you didn’t request this, you can safely ignore this email.
-        </p>
-    </div>
-    <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 30px 0;">
-    <div style="text-align: center;">
-        <p style="font-size: 12px; color: #cccccc; line-height: 1.5;">
-            Having trouble? Copy and paste the link below into your browser:<br>
-            <a href="${resetLink}" style="color: #FF7F50; text-decoration: none; font-size: 12px;">${resetLink}</a>
-        </p>
-        <p style="font-size: 12px; color: #cccccc; margin-top: 15px;">
-            Need help? Contact us at <a href="mailto:support@welcomefurniture.com" style="color: #FF7F50; text-decoration: none;">support@welcomefurniture.com</a>
-        </p>
-        <p style="font-size: 12px; color: #cccccc; margin-top: 10px;">
-            &copy; ${new Date().getFullYear()} Welcome Furniture. All rights reserved.
-        </p>
-    </div>
-</div>
-            `,
+                <div style="text-align: center;">
+                <img src="https://via.placeholder.com/150" alt="Welcome Furniture Logo" style="width: 120px; margin-bottom: 20px;">
+                <h1 style="color: #333333; font-size: 24px; font-weight: 600; margin-bottom: 10px;">Forgot Your Password?</h1>
+                <p style="font-size: 16px; color: #666666; margin-bottom: 25px;">No worries! Let's get you back into your account.</p>
+                </div>
+                <div style="text-align: center;">
+                <a href="${resetLink}" style="background-color: #FF7F50; color: #ffffff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-size: 18px; font-weight: 500; display: inline-block; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);"> Reset Password </a>
+                </div>
+                <div style="margin-top: 25px; text-align: center;">
+                <p style="font-size: 14px; color: #999999; line-height: 1.6;">
+                This link will expire in <strong>1 hour</strong>. If you didn’t request this, you can safely ignore this email.
+                </p>
+                </div>
+                <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 30px 0;">
+                <div style="text-align: center;">
+                <p style="font-size: 12px; color: #cccccc; line-height: 1.5;">
+                        Having trouble? Copy and paste the link below into your browser:<br>
+                <a href="${resetLink}" style="color: #FF7F50; text-decoration: none; font-size: 12px;">${resetLink}</a>
+                </p>
+                <p style="font-size: 12px; color: #cccccc; margin-top: 15px;">
+                Need help? Contact us at <a href="mailto:support@welcomefurniture.com" style="color: #FF7F50; text-decoration: none;">support@welcomefurniture.com</a>
+                </p>
+                <p style="font-size: 12px; color: #cccccc; margin-top: 10px;">
+                &copy; ${new Date().getFullYear()} Welcome Furniture. All rights reserved.
+                </p>
+                </div>
+                </div>
+                `,
         };
 
 

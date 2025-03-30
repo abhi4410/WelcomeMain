@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Title from '../components/Title'
 import CartTotal from '../components/CartTotal'
 import { assets } from '../assets/assets'
@@ -7,9 +7,9 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 
 const PlaceOrder = () => {
-
     const [method, setMethod] = useState('cod');
-    const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products } = useContext(ShopContext);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, products } = useContext(ShopContext);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -21,6 +21,15 @@ const PlaceOrder = () => {
         country: '',
         phone: ''
     })
+
+    // Check if cart is empty
+    useEffect(() => {
+        const hasItems = Object.values(cartItems).some(quantity => quantity > 0);
+        if (!hasItems) {
+            toast.error('Your cart is empty!');
+            navigate('/cart');
+        }
+    }, [cartItems, navigate]);
 
     const onChangeHandler = (event) => {
         const name = event.target.name
@@ -38,38 +47,80 @@ const PlaceOrder = () => {
             order_id: order.id,
             receipt: order.receipt,
             handler: async (response) => {
-                console.log(response)
                 try {
+                    setIsProcessing(true);
                     const { data } = await axios.post(backendUrl + '/api/order/verifyRazorpay', response, { headers: { token } })
                     if (data.success) {
-                        navigate('/orders')
+                        toast.success('Payment successful!');
                         setCartItems({})
+                        navigate('/orders')
+                    } else {
+                        toast.error(data.message || 'Payment verification failed');
                     }
                 } catch (error) {
-                    console.log(error)
-                    toast.error(error)
+                    console.error('Payment verification error:', error);
+                    toast.error(error.response?.data?.message || 'Payment verification failed');
+                } finally {
+                    setIsProcessing(false);
+                }
+            },
+            prefill: {
+                name: `${formData.firstName} ${formData.lastName}`,
+                email: formData.email,
+                contact: formData.phone,
+                address: {
+                    street: formData.street,
+                    city: formData.city,
+                    state: formData.state,
+                    zipcode: formData.zipcode,
+                    country: formData.country
+                }
+            },
+            theme: {
+                color: '#000000'
+            },
+            modal: {
+                ondismiss: function() {
+                    toast.info('Payment cancelled');
                 }
             }
         }
-        const rzp = new window.Razorpay(options)
-        rzp.open()
+
+        try {
+            const rzp = new window.Razorpay(options);
+            rzp.on('payment.failed', function (response) {
+                toast.error(response.error.description || 'Payment failed');
+            });
+            rzp.open();
+        } catch (error) {
+            console.error('Razorpay initialization error:', error);
+            toast.error('Failed to initialize payment');
+        }
     }
 
     const onSubmitHandler = async (event) => {
         event.preventDefault()
+        if (isProcessing) {
+            toast.info('Please wait while we process your payment...');
+            return;
+        }
+
         try {
+            // Check if cart is empty before submitting
+            const hasItems = Object.values(cartItems).some(quantity => quantity > 0);
+            if (!hasItems) {
+                toast.error('Your cart is empty!');
+                navigate('/cart');
+                return;
+            }
 
             let orderItems = []
-
-            for (const items in cartItems) {
-                for (const item in cartItems[items]) {
-                    if (cartItems[items][item] > 0) {
-                        const itemInfo = structuredClone(products.find(product => product._id === items))
-                        if (itemInfo) {
-                            itemInfo.size = item
-                            itemInfo.quantity = cartItems[items][item]
-                            orderItems.push(itemInfo)
-                        }
+            for (const itemId in cartItems) {
+                if (cartItems[itemId] > 0) {
+                    const itemInfo = structuredClone(products.find(product => product._id === itemId))
+                    if (itemInfo) {
+                        itemInfo.quantity = cartItems[itemId]
+                        orderItems.push(itemInfo)
                     }
                 }
             }
@@ -77,16 +128,15 @@ const PlaceOrder = () => {
             let orderData = {
                 address: formData,
                 items: orderItems,
-                amount: getCartAmount() + delivery_fee
+                amount: getCartAmount()
             }
 
-
             switch (method) {
-
-                // API Calls for COD
                 case 'cod':
+                    setIsProcessing(true);
                     const response = await axios.post(backendUrl + '/api/order/place', orderData, { headers: { token } })
                     if (response.data.success) {
+                        toast.success('Order placed successfully!');
                         setCartItems({})
                         navigate('/orders')
                     } else {
@@ -94,42 +144,32 @@ const PlaceOrder = () => {
                     }
                     break;
 
-                case 'stripe':
-                    const responseStripe = await axios.post(backendUrl + '/api/order/stripe', orderData, { headers: { token } })
-                    if (responseStripe.data.success) {
-                        const { session_url } = responseStripe.data
-                        window.location.replace(session_url)
-                    } else {
-                        toast.error(responseStripe.data.message)
-                    }
-                    break;
-
                 case 'razorpay':
-
+                    setIsProcessing(true);
                     const responseRazorpay = await axios.post(backendUrl + '/api/order/razorpay', orderData, { headers: { token } })
                     if (responseRazorpay.data.success) {
                         initPay(responseRazorpay.data.order)
+                    } else {
+                        toast.error(responseRazorpay.data.message || 'Failed to initialize payment');
                     }
-
                     break;
 
                 default:
                     break;
             }
 
-
         } catch (error) {
-            console.log(error)
-            toast.error(error.message)
+            console.error('Order submission error:', error);
+            toast.error(error.response?.data?.message || 'Failed to place order');
+        } finally {
+            setIsProcessing(false);
         }
     }
-
 
     return (
         <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
             {/* ------------- Left Side ---------------- */}
             <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
-
                 <div className='text-xl sm:text-2xl my-3'>
                     <Title text1={'DELIVERY'} text2={'INFORMATION'} />
                 </div>
@@ -152,7 +192,6 @@ const PlaceOrder = () => {
 
             {/* ------------- Right Side ------------------ */}
             <div className='mt-8'>
-
                 <div className='mt-8 min-w-80'>
                     <CartTotal />
                 </div>
@@ -161,10 +200,6 @@ const PlaceOrder = () => {
                     <Title text1={'PAYMENT'} text2={'METHOD'} />
                     {/* --------------- Payment Method Selection ------------- */}
                     <div className='flex gap-3 flex-col lg:flex-row'>
-                        <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
-                            <img className='h-5 mx-4' src={assets.stripe_logo} alt="" />
-                        </div>
                         <div onClick={() => setMethod('razorpay')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
                             <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'razorpay' ? 'bg-green-400' : ''}`}></p>
                             <img className='h-5 mx-4' src={assets.razorpay_logo} alt="" />
@@ -176,7 +211,13 @@ const PlaceOrder = () => {
                     </div>
 
                     <div className='w-full text-end mt-8'>
-                        <button type='submit' className='bg-black text-white px-16 py-3 text-sm'>PLACE ORDER</button>
+                        <button 
+                            type='submit' 
+                            disabled={isProcessing}
+                            className={`bg-black text-white px-16 py-3 text-sm ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                            {isProcessing ? 'PROCESSING...' : 'PLACE ORDER'}
+                        </button>
                     </div>
                 </div>
             </div>
