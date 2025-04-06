@@ -18,6 +18,8 @@ import Verify from './pages/Verify'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import Terms from './pages/Terms'
 import ScrollToTop from './components/ScrollToTop'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 
 const App = () => {
   return (
@@ -34,6 +36,8 @@ const App = () => {
         <Route path='/product/:productId' element={<Product />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password/:token' element={<ResetPassword />} />
         <Route path='/place-order' element={<PlaceOrder />} />
         <Route path='/orders' element={<Orders />} />
         <Route path='/verify' element={<Verify />} />

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import {assets} from '../assets/assets'
 import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
 
@@ -14,6 +15,7 @@ const Navbar = () => {
         localStorage.removeItem('token')
         setToken('')
         setCartItems({})
+        toast.success('Logged out successfully!')
     }
 
   return (
@@ -47,7 +49,7 @@ const Navbar = () => {
       <div className='flex items-center gap-6'>
             <img onClick={()=> { setShowSearch(true); navigate('/collection') }} src={assets.search_icon} className='w-5 cursor-pointer' alt="" />
             
-            <div className='group relative'>
+            <div className='group relative z-20'>
                 <img onClick={()=> token ? null : navigate('/login') } className='w-5 cursor-pointer' src={assets.profile_icon} alt="" />
                 {/* Dropdown Menu */}
                 {token && 
