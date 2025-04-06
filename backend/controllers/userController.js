@@ -2,6 +2,7 @@ import validator from "validator";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 import userModel from "../models/userModel.js";
+import nodemailer from 'nodemailer';
 
 
 const createToken = (id) => {
@@ -131,7 +132,9 @@ const forgotPassword = async (req, res) => {
             html: `
                 <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: auto; padding: 30px; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                 <div style="text-align: center;">
-                <img src="https://via.placeholder.com/150" alt="Welcome Furniture Logo" style="width: 120px; margin-bottom: 20px;">
+                <div style=" color: #000000; font-size: 32px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 20px;">
+                    Welcome Furniture<span style="color: #FF7F50; font-size: 36px;">.</span>
+                </div>
                 <h1 style="color: #333333; font-size: 24px; font-weight: 600; margin-bottom: 10px;">Forgot Your Password?</h1>
                 <p style="font-size: 16px; color: #666666; margin-bottom: 25px;">No worries! Let's get you back into your account.</p>
                 </div>
@@ -140,7 +143,7 @@ const forgotPassword = async (req, res) => {
                 </div>
                 <div style="margin-top: 25px; text-align: center;">
                 <p style="font-size: 14px; color: #999999; line-height: 1.6;">
-                This link will expire in <strong>1 hour</strong>. If you didn’t request this, you can safely ignore this email.
+                This link will expire in <strong>1 hour</strong>. If you didn't request this, you can safely ignore this email.
                 </p>
                 </div>
                 <hr style="border: none; border-top: 1px solid #f0f0f0; margin: 30px 0;">
@@ -159,7 +162,6 @@ const forgotPassword = async (req, res) => {
                 </div>
                 `,
         };
-
 
         // Send email
         await transporter.sendMail(mailOptions);
@@ -203,4 +205,23 @@ const resetPassword = async (req, res) => {
     }
 };
 
-export { loginUser, registerUser, adminLogin, forgotPassword, resetPassword }
+const verifyResetToken = async (req, res) => {
+    try {
+        const { token } = req.params;
+
+        // Verify Token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await userModel.findById(decoded.id);
+
+        if (!user) {
+            return res.json({ success: false, message: "Invalid token or user not found!" });
+        }
+
+        res.json({ success: true, message: "Token is valid" });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: "Token expired or invalid!" });
+    }
+};
+
+export { loginUser, registerUser, adminLogin, forgotPassword, resetPassword, verifyResetToken }
